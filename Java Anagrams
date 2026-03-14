@@ -1,0 +1,19 @@
+
+
+    static boolean isAnagram(String a, String b) {
+        int n = a.length();
+    boolean flag = (n==b.length())?true:false;
+    if (!flag) return flag;
+
+    StringBuffer sb = new StringBuffer(a.toLowerCase());
+    for(char c : b.toLowerCase().toCharArray()){
+        if(sb.lastIndexOf(String.valueOf(c))>=0)
+            sb.deleteCharAt(sb.lastIndexOf(String.valueOf(c)));
+        else
+            break;
+    }
+
+    return (sb.length()==0)?flag:false;
+}
+    
+
