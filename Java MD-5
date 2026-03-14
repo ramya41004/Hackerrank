@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String string = scanner.nextLine();
+        
+        scanner.close();
+        
+        MessageDigest md;
+        
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        
+        byte[] messageDigest = md.digest(string.getBytes());
+        StringBuilder sb = new StringBuilder();
+        
+        for (byte b : messageDigest) {
+            sb.append(String.format("%02x", b & 0xff));
+        }
+        
+        System.out.print(sb.toString());
+    }
+}
