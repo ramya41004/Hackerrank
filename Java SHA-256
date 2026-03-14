@@ -1,0 +1,33 @@
+import java.util.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        sc.close();
+        
+        try {
+            // Initialize MessageDigest with SHA-256
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            
+            // Perform the hashing on input bytes
+            byte[] digest = md.digest(s.getBytes());
+            
+            // Convert byte array to hexadecimal string
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : digest) {
+                // %02x ensures 2-digit hex with leading zeros
+                hexString.append(String.format("%02x", b));
+            }
+            
+            System.out.println(hexString.toString());
+            
+        } catch (NoSuchAlgorithmException e) {
+            // Fallback for environments without SHA-256 support
+            throw new RuntimeException(e);
+        }
+    }
+}
